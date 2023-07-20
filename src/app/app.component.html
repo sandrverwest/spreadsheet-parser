@@ -1,0 +1,2 @@
+<app-user-bar *ngIf="authStates.isLoggedIn$ | async" [user]="authStates.user"></app-user-bar>
+<router-outlet></router-outlet>

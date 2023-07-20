@@ -1,0 +1,80 @@
+<div class="parser-container">
+  <div class="parser-block">
+    <form [formGroup]="parsingForm" (submit)="parseUrls(parsingForm.get('urlsField')!.value, parsingForm)" autocomplete="off" class="input-controls">
+      <div>
+        <div class="links-title">Spreadsheet Links:</div>
+        <textarea id="links" formControlName="urlsField"></textarea>
+      </div>
+      <div class="options-block">
+        <div class="options-title">Range:</div>
+        <div class="range-block">
+          <ng-container formArrayName="ranges" *ngFor="let control of ranges.controls; let rangeIndex = index">
+            <div [formGroupName]="rangeIndex" class="range-inputs">
+              <input formControlName="tabName" size="8" placeholder="Sheet Name"><input formControlName="range" size="4" placeholder="Range">
+              <svg viewBox="0 0 24 24" (click)="removeRange(rangeIndex)" class="remove">
+                <path d="M14.121,12,18,8.117A1.5,1.5,0,0,0,15.883,6L12,9.879,8.11,5.988A1.5,1.5,0,1,0,5.988,8.11L9.879,12,6,15.882A1.5,1.5,0,1,0,8.118,18L12,14.121,15.878,18A1.5,1.5,0,0,0,18,15.878Z"/>
+              </svg>
+            </div>
+          </ng-container>
+          <div>
+            <button type="button" class="range-button" (click)="anotherRange()">+ range</button>
+          </div>
+        </div>
+
+        <div class="format-block">
+        <label>Format:</label>
+          <select formControlName="valueRenderOption">
+            <option value="FORMATTED_VALUE">Formatted</option>
+            <option value="UNFORMATTED_VALUE">Unformatted</option>
+            <option value="FORMULA">Formula</option>
+          </select>
+        </div>
+
+        <div class="buttons-block">
+          <button type="submit" class="parse-button" [disabled]="parsingForm.invalid">Parse</button>
+        </div>
+
+        <div class="access-popup" *ngIf="isHasToken">
+          <button type="button" class="access-button" (click)="getAccessToken()">Give Access Permission</button>
+        </div>
+      </div>
+    </form>
+    <hr>
+    <div class="errors-block" *ngIf="this.errorService.errorMessage$ | async as errorMessage">
+      {{errorMessage.message}}{{errorMessage.code}}
+      <ng-container *ngIf="errorMessage.code === 401">
+        Please <a (click)="getAccessToken()">update access permission</a> to connect to the spreadsheets before parse them.
+      </ng-container>
+    </div>
+    <div class="content">
+      <app-loader *ngIf="loader.loader$ | async"></app-loader>
+      <table *ngIf="dataArray.length">
+        <tr [formGroup]="titlesForm" class="title">
+          <ng-container formArrayName="titlesArray" *ngFor="let control of titles.controls | slice:0:this.dataArray[0].length; let indexTitle = index">
+            <td [formGroupName]="indexTitle">
+              <input formControlName="name">
+            </td>
+          </ng-container>
+        </tr>
+        <tr *ngFor="let row of dataArray; let odd = odd" [class.odd]="odd">
+          <td *ngFor="let cell of row; let i = index, let last = last">
+            <ng-container *ngIf="!last; else link">
+              {{ cell }}
+            </ng-container>
+            <ng-template #link>
+              <a [href]="'https://docs.google.com/spreadsheets/d/' + cell" target="_blank">
+                <svg viewBox="0 0 512.06 512.06" class="spreadsheet-link">
+                  <g>
+                    <path d="M295.407,368.363l-69.589,69.589c-42.453,41.318-110.362,40.398-151.68-2.054c-40.521-41.633-40.53-107.959-0.021-149.604   l69.589-69.653c8.33-8.336,8.325-21.846-0.011-30.176c-8.336-8.33-21.846-8.325-30.176,0.011l-69.568,69.653   c-58.539,58.569-58.515,153.503,0.053,212.043s153.503,58.515,212.043-0.053l69.589-69.589c8.185-8.475,7.95-21.98-0.524-30.165   c-8.267-7.985-21.374-7.985-29.641,0H295.407z"/>
+                    <path d="M468.186,43.969C440.146,15.736,401.971-0.098,362.18,0.001l0,0c-39.769-0.106-77.93,15.695-105.984,43.883L186.5,113.494   c-8.336,8.33-8.341,21.84-0.011,30.176c8.33,8.336,21.84,8.341,30.176,0.011l69.653-69.589   c20.061-20.182,47.363-31.497,75.819-31.424l0,0c59.24,0.02,107.248,48.059,107.228,107.299   c-0.009,28.432-11.307,55.698-31.41,75.805l-69.589,69.589c-8.336,8.336-8.336,21.851,0,30.187c8.336,8.336,21.851,8.336,30.187,0   l0,0l69.589-69.547C526.599,197.417,526.618,102.575,468.186,43.969z"/>
+                    <path d="M304.964,176.918l-128,128c-8.475,8.185-8.709,21.691-0.524,30.165s21.691,8.709,30.165,0.524   c0.178-0.172,0.352-0.346,0.524-0.524l128-128c8.185-8.475,7.95-21.98-0.525-30.165   C326.338,168.934,313.232,168.934,304.964,176.918L304.964,176.918z"/>
+                  </g>
+                </svg>
+              </a>
+            </ng-template>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

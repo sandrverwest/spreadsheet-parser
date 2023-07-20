@@ -1,0 +1,21 @@
+.notfound-page-container {
+  display: grid;
+  place-items: center;
+  height: 100%;
+}
+
+.notfound-page-container > div {
+  font-size: 5rem;
+  font-weight: 500;
+  color: #777777;
+}
+
+a {
+  color: cornflowerblue;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a:hover {
+  text-decoration: underline;
+}

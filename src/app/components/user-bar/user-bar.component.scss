@@ -1,0 +1,26 @@
+.user-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: .5rem;
+  gap: 1rem;
+  background: #fff;
+  color: #333333;
+  border-bottom: 1px solid #ccc;
+}
+
+.user-bar img {
+  height: 3rem;
+  width: 3rem;
+  border-radius: var(--radius);
+}
+
+.user-bar a {
+  padding: .5rem;
+}
+.user-bar a:hover {
+  cursor: pointer;
+  text-decoration: none;
+  background-color: #eee;
+  border-radius: var(--radius);
+}

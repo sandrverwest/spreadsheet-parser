@@ -1,0 +1,203 @@
+label {
+  font-weight: 500;
+  color: #777;
+}
+
+textarea {
+  resize: none;
+  width: 100%;
+  height: 10rem;
+  //background-color: #f9f9f9;
+}
+button, textarea, input, select {
+  padding: .2rem .5rem;
+  border: 1px solid #ccc;
+  border-radius: var(--radius);
+}
+
+textarea:focus, input:focus, select:focus {
+  outline: 1px solid lightskyblue;
+  background-color: #f9f9f9;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+  color: #777777;
+  background-color: #eeeeee;
+  border: 1px solid #cccccc;
+}
+button:disabled:hover {
+  cursor: default;
+  color: #777777;
+  background-color: #eeeeee;
+  border: 1px solid #cccccc;
+}
+
+.parser-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  margin: 1rem;
+}
+
+.parser-block {
+  width: 100%;
+  background-color: #fff;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: var(--radius);
+}
+
+.options-block {
+  position: relative;
+}
+
+.access-popup {
+  display: grid;
+  place-items: center;
+  background-color: rgba(0,0,0, .5);
+  //border-radius: var(--radius);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.range-block {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.format-block {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.input-controls {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+}
+.links-title, .options-title {
+  margin-bottom: .5rem;
+  font-weight: 500;
+  color: #777;
+}
+
+.range-inputs {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.remove {
+  visibility: hidden;
+  opacity: 0;
+  width: 1.2rem;
+  height: 1.2rem;
+  fill: #cccccc;
+  cursor: pointer;
+  transition-duration: .3s;
+  transition-property: visibility;
+}
+.remove:hover {
+  fill: lightcoral;
+}
+
+.range-inputs:hover .remove {
+  visibility: visible;
+  opacity: 1;
+}
+
+.buttons-block {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+.buttons-block > button {
+  width: 100%;
+}
+
+.range-button {
+  color: deepskyblue;
+  border: 1px solid lightskyblue;
+  background-color: rgba(lightskyblue, .1);
+}
+.range-button:hover {
+  background-color: rgba(lightskyblue, .3);
+}
+
+.access-button {
+  padding: .5rem 1rem;
+  color: #fff;
+  background-color: rgba(var(--mainGamma), 1);
+  border: 1px solid rgba(var(--mainGamma), .7);
+}
+
+.access-button:hover {
+  background-color: rgba(var(--mainGamma), .7);
+}
+
+.parse-button {
+  padding: .5rem 1rem;
+  color: #fff;
+  background-color: rgba(var(--green), 1);
+  border: 1px solid rgba(var(--green), .7);
+}
+
+.parse-button:hover {
+  background-color: rgba(var(--green), .7);
+}
+
+.content {
+  position: relative;
+  //display: flex;
+  min-height: 25rem;
+}
+
+table {
+  width: 100%;
+}
+
+table td {
+  text-align: center;
+  padding: .2rem .5rem;
+}
+
+tr.title td {
+  //padding: .5rem;
+}
+tr.title td input {
+  border-radius: 0;
+  width: 100%;
+  font-weight: 600;
+  background-color: #eeeeee;
+  color: #777777;
+  text-align: center;
+}
+
+.spreadsheet-link {
+  fill: cornflowerblue;
+  width: 1rem;
+  height: 1rem;
+}
+
+.spreadsheet-link:hover {
+  fill: deepskyblue;
+}
+
+.odd td {
+  background-color: #F5F5F5;
+}
+
+tr:hover td{
+  background-color: rgba(lightskyblue, .2);
+}
